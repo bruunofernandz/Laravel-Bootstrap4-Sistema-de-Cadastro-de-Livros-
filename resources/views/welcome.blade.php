@@ -53,7 +53,11 @@
             @media (max-width: 600px){
 
             }
-            
+            .navbar {
+                background: #FFF;
+                border: 0px;
+                box-shadow: 0px 0px 10px 0px;
+            }
         </style>
     </head>
     <body>
@@ -65,7 +69,7 @@
 
         <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
 
-            <span><a href="{{ route('raiz') }}">RegBooks</a></span>
+            <span><a href="{{url('/')}}">RegBooks</a></span>
 
             <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
             </ul>
@@ -73,7 +77,8 @@
             <form class="form-inline my-2 my-lg-0">
             <input class="form-control mr-sm-2" type="search" placeholder="Buscar Livro" aria-label="Search">
             <button class="btn btn-outline" type="submit">Buscar</button>
-            <a href="{{ route('cadastro') }}" class="btn">Cadastrar</a>
+            <a href="{{url('/cadastrar')}}" class="btn">Cadastrar</a>
+            <a href="{{url('/livros')}}" class="btn">Locação</a>
             </form>           
         </div>
     </nav>
@@ -105,7 +110,7 @@
             </a>
     </div>
     <div class="container">
-        <a href="{{ route('cadastro') }}" class="btn btn-lg btn-outline-dark btn-block">Cadastre seu livro agora mesmo !</a>
+        <a href="{{url('/cadastrar')}}" class="btn btn-lg btn-outline-dark btn-block">Cadastre seu livro agora mesmo !</a>
     </div>
 </body>
 </html>

@@ -14,7 +14,7 @@
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
         <style>
             html, body {
-
+                width: 100%;
                 font-family: 'Nunito', sans-serif;        
             }
             li {
@@ -36,16 +36,17 @@
                 align-items: center;
                 flex-direction: column;
                 border: 0;
-                width: 40vw;
-                height: 70vh;
+                width: 100vw;
+                height: auto;
                 background: rgba(255, 255, 255, 0.1);
                 border-radius: 15px;
                 box-shadow: 0px 0px 5px 0px;
             }
             @media (max-width: 600px){
                 .container {
-                    width: 400px;
-                    height: 400px;
+                    width: 30vw;
+                    border-radius: 0;
+                    box-shadow: 0px 0px 0px 0px;
                 }
             }
             .reg {
@@ -75,7 +76,7 @@
                 -ms-box-shadow: 0 10px 30px 0px rgba(255, 75, 90, 0.5);
             }
             .reg:hover {
-                background-color: #333333;
+                background-color: #ff4b5a;
                 box-shadow: 0 10px 30px 0px rgba(51, 51, 51, 0.5);
                 -moz-box-shadow: 0 10px 30px 0px rgba(51, 51, 51, 0.5);
                 -webkit-box-shadow: 0 10px 30px 0px rgba(51, 51, 51, 0.5);
@@ -83,11 +84,16 @@
                 -ms-box-shadow: 0 10px 30px 0px rgba(51, 51, 51, 0.5);  
             }
             .form-control {
-                width: 30vw;
+                width: 35vw;
             }
             .book {
-                width: 100px;
+                width: 80px;
                 margin-bottom: 20px;
+            }
+            .navbar {
+                background: #FFF;
+                border: 0px;
+                box-shadow: 0px 0px 10px 0px;
             }
         </style>
     </head>
@@ -101,7 +107,7 @@
 
         <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
 
-            <span><a href="{{ route('raiz') }}">RegBooks</a></span>
+            <span><a href="{{url('/')}}">RegBooks</a></span>
 
             <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
             </ul>
@@ -109,39 +115,52 @@
             <form class="form-inline my-2 my-lg-0">
             <input class="form-control mr-sm-2" type="search" placeholder="Buscar Livro" aria-label="Search">
             <button class="btn btn-outline" type="submit">Buscar</button>
-            <a href="{{ route('cadastro') }}" class="btn">Cadastrar</a>
+            <a href="{{url('/livros')}}" class="btn">Locação</a>
             </form>           
         </div>
     </nav>
     <div class="container">
-        <img class="book" src="{{ asset('/img/open-book.png') }}" alt="">
-        <form action="" class="was-validated">
+        <form action="{{ url('/livros/cadastrado') }}" methos="get" class="was-validated">
+        <h1 style="text-align: center">Cadastro de livro</h1>
                 <div class="form-group">
-                    <span>Título do livro</span>
-                    <input type="text" class="form-control is-invalid" required>
+                    <span>Nome do Livro</span>
+                    <input type="text" class="form-control is-invalid" name="nome" required>
                 </div>
                 
                 <div class="form-group">
                     <span>Autor do Livro</span>
-                    <input type="text" class="form-control is-invalid" required>
+                    <select class="form-control" name="autor_id">
+                        <option value="" select disabled hidden>Selecione um Autor Cadastrado</option>
+                        @foreach($tipoAutor as $autor)
+                        <option value="{{ $autor->id }}">{{ $autor->nome }}</option>
+                        @endforeach
+                    </select>
                 </div>
 
                 <div class="form-group">
-                    <span>Autor do Livro</span>
-                    <select name="" class="form-control">
-                        <option value="">Um</option>
-                        <option value="">Dois</option>
-                        <option value="">Tres</option>
+                    <span>Genero</span>
+                    <select class="form-control" name="genero">
+                        <option value="" selected disabled hidden>Escolha seu Genero</option>
+                        @foreach($opcoes as $opcao)
+                            <option value="{{ $opcao->descricao }}">{{ $opcao->descricao}}</option>
+                        @endforeach
                     </select>
                 </div>
 
                 <div class="form-group">
                     <span>Descrição</span>
-                    <textarea class="form-control is-invalid" id="validationTextarea" placeholder="Required example textarea" required></textarea>
+                    <textarea name="descricao" class="form-control is-invalid" id="validationTextarea" placeholder="Required example textarea" required></textarea>
+                </div>
+
+                <div class="form-group">
+                    <span>Quantidade</span>
+                    <input name="quantidade"type="number" class="form-control is-invalid" placeholder="Numero de livros a ser cadastrado" required />
+                    <span>ISBN</span>
+                    <input name="ISBN" type="number" class="form-control is-invalid" placeholder="Numero de livros a ser cadastrado" required />
                 </div>
 
 
-                <button class="btn reg mb-2">Cadastrar</button>
+                <button class="btn reg mb-2" type="Submit">Cadastrar</button>
    
         </form>
     </div>
